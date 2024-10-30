@@ -7,8 +7,8 @@ PROD="ShopDB"
 RESERVE="ShopDBReserve"
 STAGE="ShopDBDevelopment"
 
-mysqldump -u "$DB_USER" -p"$DB_PASSWORD" --no-create-db "$PROD" | \
-mysql -u "$DB_USER" -p"$DB_PASSWORD" "$RESERVE"
+mysqldump -u "$DB_USER" -p"$DB_PASSWORD" --no-create-db "$PROD" > backup.reserve.sql
+mysql -u "$DB_USER" -p"$DB_PASSWORD" "$RESERVE" < backup.reserve.sql
 
-mysqldump -u "$DB_USER" -p"$DB_PASSWORD" --no-create-db --no-create-info "$PROD" | \
-mysql -u "$DB_USER" -p"$DB_PASSWORD" "$STAGE"
+mysqldump -u "$DB_USER" -p"$DB_PASSWORD" --no-create-db --no-create-info "$PROD" > backup.stage.sql
+mysql -u "$DB_USER" -p"$DB_PASSWORD" "$STAGE" < backup.stage.sql
